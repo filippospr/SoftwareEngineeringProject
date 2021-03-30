@@ -1,0 +1,18 @@
+.pausebutton {
+	-fx-background-image: url("pausebutton.png");
+	-fx-background-position: relative;
+	-fx-background-size: 100%;
+	-fx-background-repeat: stretch;
+	-fx-background-color:transparent;
+	-fx-opacity: 1.0;
+}
+
+.pausebutton:hover {
+	-fx-opacity: 0.8;
+}
+
+.pausebutton:pressed {
+	-fx-background-image: url("pausebuttonpressed.png");
+}
+
+/*2d819d*/

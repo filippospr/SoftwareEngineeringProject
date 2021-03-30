@@ -1,0 +1,18 @@
+.playbutton {
+	-fx-background-image: url("playbutton.png");
+	-fx-background-position: center;
+	-fx-background-size: 100%;
+	-fx-background-repeat: stretch;
+	-fx-background-color:transparent;
+	-fx-opacity: 1.0;
+	-fx-view-order: -1;
+}
+
+.playbutton:hover {
+	-fx-opacity: 0.8;
+}
+
+.playbutton:pressed {
+	-fx-background-image: url("playbuttonpressed.png");
+}
+

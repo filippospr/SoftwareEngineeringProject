@@ -1,0 +1,16 @@
+.slider .track {
+    -fx-background-insets: 0 0 -1 0, 0, 1;
+    -fx-background-radius: 0.5em, 0.5em, 0.166667em; /* 3 3 2 */
+    -fx-padding: 0.25em; /* 3 */
+    -progress : 0.5;
+    -fx-background-color: linear-gradient(to right, #2D819D 0.5, #969696 0.5);
+    -fx-min-height:12;
+    -fx-pref-height:12;
+}
+.slider .thumb {
+  -fx-padding:12;
+}
+
+#color-slider .track{
+    -fx-background-color:transparent;
+}
