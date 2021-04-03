@@ -1,10 +1,4 @@
 .toolbar {
 	-fx-spacing: -10px;
+	-fx-align: left;
 }
-
-/*.button .rewind {
-	-fx-min-height: 55px;
-	-fx-max-height: 55px;
-	-fx-min-width: 55px;
-	-fx-max-width: 55px;
-}*/

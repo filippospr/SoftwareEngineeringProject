@@ -40,10 +40,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -59,20 +62,22 @@
                   </MenuItem>
             <Menu mnemonicParsing="false" text="Save">
                      <items>
-                  <MenuItem mnemonicParsing="false" text="Atbash encryption" />
+                        <MenuItem mnemonicParsing="false" text="Simple Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Rot-13" />
+                  <MenuItem mnemonicParsing="false" text="Atbash encryption" />
+                        <MenuItem mnemonicParsing="false" text="Rot-13 encryption" />
                      </items>
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
                   </Menu>
             <MenuItem mnemonicParsing="false" text="Close File">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false" />
+            <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
             <MenuItem mnemonicParsing="false" text="Exit" />
           </items>
         </Menu>
@@ -117,6 +122,7 @@
                   </MenuItem>
           </items>
         </Menu>
+            <Menu disable="true" mnemonicParsing="false" text="Recordings" />
         <Menu mnemonicParsing="false" text="Help">
           <items>
             <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
@@ -124,33 +130,76 @@
         </Menu>
       </menus>
     </MenuBar>
-      <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <Slider stylesheets="@slider.css" VBox.vgrow="ALWAYS">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </Slider>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center;" VBox.vgrow="ALWAYS">
-        <items>
-          <Button mnemonicParsing="false" text="Open" />
-            <Button id="playbutton" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" stylesheets="@playbutton.css">
+      <Pane id="EditorContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+      <VBox id="AudiocontrolsContainer" alignment="CENTER" VBox.vgrow="NEVER">
+         <children>
+            <Slider stylesheets="@slider.css">
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="E_RESIZE" />
                </cursor>
-            </Button>
-            <Button mnemonicParsing="false" text="Open" />
-        </items>
-         <padding>
-            <Insets bottom="15.0" />
-         </padding>
-      </ToolBar>
+            </Slider>
+            <GridPane alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="509.0" minWidth="0.0" percentWidth="15.0" prefWidth="143.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1033.0" minWidth="10.0" percentWidth="70.0" prefWidth="993.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="15.0" prefWidth="144.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1020.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                     <children>
+                      <Button id="rewindbutton" mnemonicParsing="false" styleClass="rewind" stylesheets="@rewind.css">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button id="playbutton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton" stylesheets="@playbutton.css">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button id="ffbutton" mnemonicParsing="false" styleClass="fastforward" stylesheets="@fastforward.css">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@soundbutton.css" HBox.hgrow="NEVER">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Slider prefHeight="62.0" prefWidth="140.0">
+                           <effect>
+                              <DropShadow height="3.0" radius="2.25" width="8.0" />
+                           </effect>
+                        </Slider>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
   </children>
 </VBox>

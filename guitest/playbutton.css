@@ -9,7 +9,7 @@
 }
 
 .playbutton:hover {
-	-fx-opacity: 0.8;
+	-fx-background-image: url("playbuttonhover.png");
 }
 
 .playbutton:pressed {
