@@ -1,0 +1,5 @@
+.editor {
+	/*-fx-min-width: inherit;
+	-fx-min-height: inherit;*/
+	-fx-vgrow-policy:always;
+}

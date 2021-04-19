@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
+  <children>
+    <MenuBar style="-fx-font-size: 17; -fx-scale-x: 1;">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+                  <Menu mnemonicParsing="false" text="Open File">
+                    <items>
+                  <MenuItem mnemonicParsing="false" text="No Encryption">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                      <MenuItem mnemonicParsing="false" text="Atbash encrypted" />
+                        <MenuItem mnemonicParsing="false" text="Rot-13 encrypted" />
+                    </items>
+                  </Menu>
+            <Menu mnemonicParsing="false" text="Save File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Simple Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Atbash encryption" />
+                        <MenuItem mnemonicParsing="false" text="Rot-13 encryption" />
+                     </items>
+                  </Menu>
+            <MenuItem mnemonicParsing="false" text="Close File">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Start Recording" />
+                  <MenuItem mnemonicParsing="false" text="End Recording" visible="false" />
+                  <MenuItem mnemonicParsing="false" text="Replay Transformation" />
+            <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
+            <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Redo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Cut">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Copy">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Paste">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Transform">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <Pane id="EditorContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+      <VBox id="AudiocontrolsContainer" alignment="CENTER" disable="true" VBox.vgrow="NEVER">
+         <children>
+            <Slider stylesheets="@gui%20files/css/slider.css">
+               <cursor>
+                  <Cursor fx:constant="E_RESIZE" />
+               </cursor>
+            </Slider>
+            <GridPane alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="509.0" minWidth="0.0" percentWidth="15.0" prefWidth="143.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1033.0" minWidth="10.0" percentWidth="70.0" prefWidth="993.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="15.0" prefWidth="144.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="55.0" minHeight="41.0" prefHeight="41.0" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1020.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                     <children>
+                      <Button id="rewindbutton" mnemonicParsing="false" styleClass="rewind" stylesheets="@gui%20files/css/rewind.css">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button id="playbutton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton" stylesheets="@gui%20files/css/playbutton.css">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button id="ffbutton" mnemonicParsing="false" styleClass="fastforward" stylesheets="@gui%20files/css/fastforward.css">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@gui%20files/css/soundbutton.css" HBox.hgrow="NEVER">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Slider prefHeight="62.0" prefWidth="140.0">
+                           <effect>
+                              <DropShadow height="3.0" radius="2.25" width="8.0" />
+                           </effect>
+                        </Slider>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Pitch">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Slider />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label layoutX="60.0" layoutY="17.0" text="Audio Speed">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Button minWidth="25.0" mnemonicParsing="false" text="-" />
+                              <Button mnemonicParsing="false" text="+" />
+                              <Label styleClass="speedlabel" stylesheets="@gui%20files/css/speedlabel.css" text="x1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets right="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+  </children>
+</VBox>
