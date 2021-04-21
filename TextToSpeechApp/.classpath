@@ -6,5 +6,20 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/ooxml-lib/commons-compress-1.20.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/ooxml-lib/curvesapi-1.06.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/ooxml-lib/xmlbeans-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/lib/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/lib/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/lib/SparseBitSet-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-examples-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-excelant-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-integration-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-ooxml-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-ooxml-full-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-ooxml-lite-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-scratchpad-5.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
