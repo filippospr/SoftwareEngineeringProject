@@ -1,7 +1,7 @@
 package documentReader;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface DocumentReader {
-	public List<String> read();
+	public ArrayList<String> read();
 }
