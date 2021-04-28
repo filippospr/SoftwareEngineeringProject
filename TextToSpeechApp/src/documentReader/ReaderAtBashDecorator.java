@@ -23,7 +23,6 @@ public class ReaderAtBashDecorator extends ReaderDecorator {
     }
     
     public static void main(String[] args) {
-		String test = "Mpekaltsa";
 		ReaderAtBashDecorator dec = new ReaderAtBashDecorator(new WordReader("bankai.docx"));
 		System.out.println(dec.read());
 	}

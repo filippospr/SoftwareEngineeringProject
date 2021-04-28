@@ -59,11 +59,4 @@ public class ExcelReader implements DocumentReader {
 		System.out.println(result);
 		return result;
 	}
-	
-	public static void main(String[] args)
-	{
-		ExcelReader test = new ExcelReader("Financial_Sample.xlsx");
-		ArrayList<String> testList= test.read();
-	}
-
 }

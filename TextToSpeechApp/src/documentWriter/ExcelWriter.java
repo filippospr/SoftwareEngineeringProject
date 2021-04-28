@@ -19,7 +19,7 @@ public class ExcelWriter implements DocumentWriter {
 	@Override	
     public void write(ArrayList<String> contents) {
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+        XSSFSheet sheet = workbook.createSheet("Excel Sheet");
 
         ArrayList<ArrayList<String>> output=new ArrayList<ArrayList<String>>();
         ArrayList<String> Rrow= new ArrayList<String>();

@@ -41,12 +41,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -59,7 +59,7 @@
           <items>
                   <Menu mnemonicParsing="false" text="Open File">
                     <items>
-                  <MenuItem mnemonicParsing="false" text="No Encryption">
+                  <MenuItem fx:id="openFile" mnemonicParsing="false" onAction="#openDocument" text="No Encryption">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
@@ -142,11 +142,11 @@
         </Menu>
       </menus>
     </MenuBar>
-      <Pane id="EditorContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </Pane>
+      <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
       <VBox id="AudiocontrolsContainer" alignment="CENTER" disable="true" VBox.vgrow="NEVER">
          <children>
             <Slider stylesheets="@gui%20files/css/slider.css">

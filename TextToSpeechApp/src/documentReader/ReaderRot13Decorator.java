@@ -1,5 +1,4 @@
 package documentReader;
-import java.util.ArrayList;
 
 public class ReaderRot13Decorator extends ReaderDecorator {
 
@@ -21,13 +20,4 @@ public class ReaderRot13Decorator extends ReaderDecorator {
         
         return result;
     }
-    public static void main(String[] args) {
-		String test = "Mpekaltsa";
-		ReaderRot13Decorator dec = new ReaderRot13Decorator(new WordReader("bankai.docx"));
-		ArrayList<String> momo = dec.read();
-		//for(String i: momo) {
-		//	System.out.println(dec.decrypt(i));
-		//}
-	}
-
 }

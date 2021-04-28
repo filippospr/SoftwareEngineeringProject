@@ -7,11 +7,11 @@ import documentWriter.*;
 
 public class Document {
 	private ArrayList<String> contents;
-	DocumentWriter writer;
-	DocumentReader reader;
-	DocumentReaderFactory readerFactory;
-	DocumentWriterFactory writerFactory;
-	TTSFacade audioManager;
+	private DocumentWriter writer;
+	private DocumentReader reader;
+	private DocumentReaderFactory readerFactory;
+	private DocumentWriterFactory writerFactory;
+	private TTSFacade audioManager;
 	
 	public Document()
 	{
@@ -55,5 +55,10 @@ public class Document {
 	{
 		String line = contents.get(lineNo);
 		audioManager.play(line);
+	}
+	
+	public ArrayList<String> getContents()
+	{
+		return contents;
 	}
 }
