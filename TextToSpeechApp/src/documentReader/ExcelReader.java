@@ -13,15 +13,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader implements DocumentReader {
 
-	private String filename;
-	public ExcelReader(String filename) {
-		this.filename = filename;
+	private File file;
+	public ExcelReader(File file) {
+		this.file = file;
 	}
 	@Override
 	public ArrayList<String> read() {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
-			FileInputStream excelFile = new FileInputStream(new File(filename));
+			FileInputStream excelFile = new FileInputStream(file);
             Workbook workbook = new XSSFWorkbook(excelFile);
             excelFile.close();
             Sheet datatypeSheet = workbook.getSheetAt(0);

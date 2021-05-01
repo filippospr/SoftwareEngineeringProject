@@ -65,8 +65,8 @@
                            </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                      <MenuItem mnemonicParsing="false" text="Atbash encrypted" />
-                        <MenuItem mnemonicParsing="false" text="Rot-13 encrypted" />
+                      <MenuItem fx:id="openAtBashFile" mnemonicParsing="false" onAction="#openAtBashDocument" text="Atbash encrypted" />
+                        <MenuItem fx:id="openRot13File" mnemonicParsing="false" onAction="#openRot13Document" text="Rot-13 encrypted" />
                     </items>
                   </Menu>
             <Menu mnemonicParsing="false" text="Save File">
@@ -89,7 +89,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Start Recording" />
                   <MenuItem mnemonicParsing="false" text="End Recording" visible="false" />
-                  <MenuItem mnemonicParsing="false" text="Replay Transformation" />
+                  <MenuItem fx:id="replayButton" mnemonicParsing="false" onAction="#replay" text="Replay Transformation" />
             <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
             <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
           </items>
@@ -122,7 +122,7 @@
                         <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Transform">
+                  <MenuItem fx:id="transformButton" mnemonicParsing="false" onAction="#transformText" text="Transform">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

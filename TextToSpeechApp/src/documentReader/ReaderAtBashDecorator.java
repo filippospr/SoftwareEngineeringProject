@@ -21,9 +21,4 @@ public class ReaderAtBashDecorator extends ReaderDecorator {
         }
         return result;
     }
-    
-    public static void main(String[] args) {
-		ReaderAtBashDecorator dec = new ReaderAtBashDecorator(new WordReader("bankai.docx"));
-		System.out.println(dec.read());
-	}
 }

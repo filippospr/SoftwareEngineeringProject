@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import documentReader.*;
@@ -11,16 +12,10 @@ public class Document {
 	private DocumentReader reader;
 	private DocumentReaderFactory readerFactory;
 	private DocumentWriterFactory writerFactory;
-	private TTSFacade audioManager;
 	
 	public Document()
 	{
 		contents = new ArrayList<String>();
-	}
-	
-	public void setAudioManager(TTSFacade audioManager)
-	{
-		this.audioManager = audioManager;
 	}
 	
 	public void setDocReaderFactory(DocumentReaderFactory readerFactory)
@@ -33,28 +28,15 @@ public class Document {
 		this.writerFactory = writerFactory;
 	}
 	
-	public void open(String name, String filetype, String encryption)
+	public void open(File file, String filetype, String encryption)
 	{
-		reader = readerFactory.createReader(name, filetype, encryption);
+		reader = readerFactory.createReader(file, filetype, encryption);
 		contents = reader.read();
 	}
 	public void save(String name, String filetype, String encryption)
 	{
 		writer = writerFactory.createWriter(name, filetype, encryption);
 		writer.write(contents);
-	}
-	
-	public void playContents()
-	{
-		for(String line: contents) {
-			audioManager.play(line);
-		}
-	}
-	
-	public void playLine(int lineNo)
-	{
-		String line = contents.get(lineNo);
-		audioManager.play(line);
 	}
 	
 	public ArrayList<String> getContents()

@@ -2,20 +2,27 @@ package commands;
 
 import java.util.ArrayList;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 public class ReplayManager {
 	private boolean recordingStatus;
-	private ArrayList<EventHandler<ActionEvent>> commandList;
+	private ArrayList<Action> commandList;
 	
 	public ReplayManager() {
 		recordingStatus = false;
-		commandList = new ArrayList<EventHandler<ActionEvent>>();
+		commandList = new ArrayList<Action>();
 	}
 	
 	public void replay() {
-		
+		for(Action a:commandList) {
+			a.replayAction();
+		}
+	}
+	
+	public void replay(int i) {
+			commandList.get(i).replayAction();
+	}
+	
+	public ArrayList<Action> getCommands(){
+		return commandList;
 	}
 	
 	public void startRecording()
@@ -32,7 +39,7 @@ public class ReplayManager {
 		return recordingStatus;
 	}
 	
-	public void addAction(EventHandler<ActionEvent> actionListener) {
-		
+	public void addAction(Action e) {
+		commandList.add(e);
 	}
 }

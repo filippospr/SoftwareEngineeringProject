@@ -1,21 +1,23 @@
 package documentReader;
 
+import java.io.File;
+
 public class DocumentReaderFactory 
 {
 
-	public DocumentReader createReader(String filename, String filetype, String encryption)
+	public DocumentReader createReader(File file, String filetype, String encryption)
 	{
 		DocumentReader reader = null;
 		switch (filetype){
 		case "word":
-			reader = new WordReader(filename);
+			reader = new WordReader(file);
 			break;
 		case "excel":
-			reader = new ExcelReader(filename);
+			reader = new ExcelReader(file);
 			break;
 		}
 		
-		switch (filetype){
+		switch (encryption){
 		case "atbash":
 			reader = new ReaderAtBashDecorator(reader);
 			break;

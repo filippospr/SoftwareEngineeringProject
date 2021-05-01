@@ -6,24 +6,23 @@ import java.util.Arrays;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class WordReader implements DocumentReader {
 
-	private String filename;
-	public WordReader(String filename)
+	private File file;
+	public WordReader(File file)
 	{
-		this.filename = filename;
+		this.file = file;
 	}
 	@Override
 	public ArrayList<String> read(){
 		ArrayList<String> result = new ArrayList<String>();
         try (XWPFDocument doc = new XWPFDocument(
-                Files.newInputStream(Paths.get(filename)))) {
-
+               new FileInputStream(file))) {
             XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
             String docText = xwpfWordExtractor.getText();
             result.addAll(Arrays.asList(docText.split("\n")));
@@ -40,16 +39,5 @@ public class WordReader implements DocumentReader {
             e.printStackTrace();
         }
 		return result;
-	}
-	public static void main(String[] args){
-		WordReader test = new WordReader("bankai.docx");
-		ArrayList<String> testList= test.read();
-		String tt = "bankai";
-		System.out.println('A'-5);
-		for(char i: tt.toCharArray()) {
-			System.out.print(i);
-		}
-			
-		System.out.println(testList);
 	}
 }
