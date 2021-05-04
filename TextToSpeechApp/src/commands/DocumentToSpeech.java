@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DocumentToSpeech implements Action  {
 
@@ -58,7 +59,7 @@ public class DocumentToSpeech implements Action  {
 		if (transformStatus == 1) {
 			text = textArea.getSelectedText();
 		}
-		commandManager.play(text);
+		replayAction();
 		commandManager.setTransformStatus(-1);
 		addToReplayManager();
 		
@@ -78,7 +79,8 @@ public class DocumentToSpeech implements Action  {
 	}
 	
 	private void addToReplayManager() {
-		replayManager.addAction(clone());
+		if (replayManager.isActiveRecording())
+			replayManager.addAction(clone());
 	}
 	
 	private void showTransformPopUp()
@@ -89,7 +91,8 @@ public class DocumentToSpeech implements Action  {
 		//stop resize,and stay on top of parent
 		newStage.setResizable(false);
 		newStage.initOwner(parent);
-		newStage.initModality(Modality.WINDOW_MODAL);
+		newStage.initModality(Modality.APPLICATION_MODAL);
+		newStage.initStyle(StageStyle.UTILITY);
 		
 		VBox container = new VBox();
 		container.setAlignment(Pos.CENTER);

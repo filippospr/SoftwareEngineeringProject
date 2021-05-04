@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import documentReader.DocumentReaderFactory;
+import documentWriter.DocumentWriterFactory;
 import model.Document;
 import model.TTSFacade;
 
@@ -19,18 +20,18 @@ public class CommandManager {
 		document = new Document();
 		audioManager = new TTSFacade();
 		document.setDocReaderFactory(new DocumentReaderFactory());
+		document.setDocWriterFactory(new DocumentWriterFactory());
 		initExtentionsList();
 	}
 	
 	public String openDocument(File file, String encryption)
 	{
 		String name = file.getName();
-		String ext = findFileType(name);
+		String ext = findFileType(name).toLowerCase();
 		if (ext == null) {
 			return null;
 		}
-			
-		ext = ext.toLowerCase();
+		
 		document.open(file, ext, encryption);
 		
 		ArrayList<String> contents = document.getContents();
@@ -41,6 +42,17 @@ public class CommandManager {
 		    res.append("\n");
 		}		
 		return res.toString();
+	}
+	
+	public void saveDocument(File file, String encryption) {
+		String ext = findFileType(file.getName()).toLowerCase();
+		if (ext == null) {
+			return;
+		}
+		System.out.println(file);
+		System.out.println(ext);
+		System.out.println(encryption);
+		document.save(file, ext, encryption);
 	}
 	
 	public void setAudioManager(TTSFacade audioManager)
@@ -92,9 +104,13 @@ public class CommandManager {
 		wordList.add("*.docm");
 		extensionsList.put("Word", wordList);
 		ArrayList<String> excelList = new ArrayList<String>();
-		excelList.add("*.xls");
 		excelList.add("*.xlsx");
+		excelList.add("*.xls");
 		extensionsList.put("Excel", excelList);
+	}
+
+	public void setContents(String[] text) {
+		document.setContents(text);
 	}
 	
 }

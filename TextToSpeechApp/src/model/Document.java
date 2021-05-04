@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import documentReader.*;
 import documentWriter.*;
@@ -33,14 +34,20 @@ public class Document {
 		reader = readerFactory.createReader(file, filetype, encryption);
 		contents = reader.read();
 	}
-	public void save(String name, String filetype, String encryption)
+	
+	public void save(File file, String filetype, String encryption)
 	{
-		writer = writerFactory.createWriter(name, filetype, encryption);
+		writer = writerFactory.createWriter(file, filetype, encryption);
 		writer.write(contents);
 	}
 	
 	public ArrayList<String> getContents()
 	{
 		return contents;
+	}
+
+	public void setContents(String[] text) {
+		contents.clear();
+		contents.addAll(Arrays.asList(text));
 	}
 }

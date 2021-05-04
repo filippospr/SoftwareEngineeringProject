@@ -1,5 +1,6 @@
 package documentWriter;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,9 +13,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWriter implements DocumentWriter {
 
-	private String filename;
-	public ExcelWriter(String filename) {
-		this.filename = filename;
+	private File file;
+	public ExcelWriter(File file) {
+		this.file = file;
 	}
 	@Override	
     public void write(ArrayList<String> contents) {
@@ -39,12 +40,11 @@ public class ExcelWriter implements DocumentWriter {
             for (String s : r) {
                 Cell cell = row.createCell(colNum++);
                 cell.setCellValue(s);
-                
             }
         }
         
         try {
-            FileOutputStream outputStream = new FileOutputStream(filename);
+            FileOutputStream outputStream = new FileOutputStream(file);
             workbook.write(outputStream);
             workbook.close();
         } catch (FileNotFoundException e) {
@@ -54,16 +54,4 @@ public class ExcelWriter implements DocumentWriter {
         }
 
 	}
-	
-	public static void main(String[] args)
-	{
-		ArrayList<String> te = new ArrayList<String>();
-		te.add("mppp");
-		te.add("\n");
-		te.add("makaskdad");
-		te.add("makaskdad");
-		ExcelWriter test = new ExcelWriter("piroprio.xlsx");
-		test.write(te);
-	}
-
 }

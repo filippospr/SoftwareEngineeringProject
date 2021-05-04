@@ -71,68 +71,26 @@
                   </Menu>
             <Menu mnemonicParsing="false" text="Save File">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Simple Save">
+                        <MenuItem mnemonicParsing="false" onAction="#saveDocument" text="Simple Save">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Atbash encryption" />
-                        <MenuItem mnemonicParsing="false" text="Rot-13 encryption" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAtBashDocument" text="Atbash encryption" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveRot13Document" text="Rot-13 encryption" />
                      </items>
                   </Menu>
-            <MenuItem mnemonicParsing="false" text="Close File">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Start Recording" />
-                  <MenuItem mnemonicParsing="false" text="End Recording" visible="false" />
-                  <MenuItem fx:id="replayButton" mnemonicParsing="false" onAction="#replay" text="Replay Transformation" />
-            <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
-            <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-            <MenuItem mnemonicParsing="false" text="Redo">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-            <MenuItem mnemonicParsing="false" text="Copy">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-            <MenuItem mnemonicParsing="false" text="Paste">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
                   <MenuItem fx:id="transformButton" mnemonicParsing="false" onAction="#transformText" text="Transform">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
+                  <MenuItem fx:id="recordingButton" mnemonicParsing="false" onAction="#toggleRecordingStatus" text="Start Recording" />
+                  <MenuItem fx:id="replayButton" mnemonicParsing="false" onAction="#replay" text="Replay Transformation" />
+            <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
+            <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -149,7 +107,7 @@
       </TextArea>
       <VBox id="AudiocontrolsContainer" alignment="CENTER" disable="true" VBox.vgrow="NEVER">
          <children>
-            <Slider stylesheets="@gui%20files/css/slider.css">
+            <Slider stylesheets="@gui_files/css/slider.css">
                <cursor>
                   <Cursor fx:constant="E_RESIZE" />
                </cursor>
@@ -166,12 +124,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1020.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
                      <children>
-                      <Button id="rewindbutton" mnemonicParsing="false" styleClass="rewind" stylesheets="@gui%20files/css/rewind.css">
+                      <Button id="rewindbutton" mnemonicParsing="false" styleClass="rewind" stylesheets="@gui_files/css/rewind.css">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button id="playbutton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton" stylesheets="@gui%20files/css/playbutton.css">
+                        <Button id="playbutton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton" stylesheets="@gui_files/css/playbutton.css">
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
@@ -179,7 +137,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button id="ffbutton" mnemonicParsing="false" styleClass="fastforward" stylesheets="@gui%20files/css/fastforward.css">
+                        <Button id="ffbutton" mnemonicParsing="false" styleClass="fastforward" stylesheets="@gui_files/css/fastforward.css">
                            <effect>
                               <DropShadow />
                            </effect>
@@ -191,7 +149,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@gui%20files/css/soundbutton.css" HBox.hgrow="NEVER">
+                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@gui_files/css/soundbutton.css" HBox.hgrow="NEVER">
                            <effect>
                               <DropShadow />
                            </effect>
@@ -227,7 +185,7 @@
                               </Label>
                               <Button minWidth="25.0" mnemonicParsing="false" text="-" />
                               <Button mnemonicParsing="false" text="+" />
-                              <Label styleClass="speedlabel" stylesheets="@gui%20files/css/speedlabel.css" text="x1">
+                              <Label styleClass="speedlabel" stylesheets="@gui_files/css/speedlabel.css" text="x1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

@@ -1,5 +1,6 @@
 package documentWriter;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 public class WordWriter implements DocumentWriter {
 
-	private String filename;
-	public WordWriter(String filename) {
-		this.filename = filename;
+	private File file;
+	public WordWriter(File file) {
+		this.file = file;
 	}
 	@Override
 	public void write(ArrayList<String> contents) {
@@ -37,19 +38,12 @@ public class WordWriter implements DocumentWriter {
             r1.setText(output);
 
             // save it to .docx file
-            FileOutputStream out = new FileOutputStream(filename);
+            FileOutputStream out = new FileOutputStream(file);
             doc.write(out);
+            out.close();
          } catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}	
 	}
-    public static void main(String[] args)
-    {
-    	ArrayList<String> giannhs = new ArrayList<String>();
-    	giannhs.add("filokolhs");
-    	giannhs.add("dfdsfsdsfsfdsfs");
-    	WordWriter w = new WordWriter("minipo.docx");
-    	w.write(giannhs);
-    }
 }

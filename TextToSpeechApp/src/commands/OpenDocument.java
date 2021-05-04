@@ -2,11 +2,8 @@ package commands;
 
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javafx.scene.control.TextArea;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class OpenDocument implements Action {
@@ -69,26 +66,12 @@ public class OpenDocument implements Action {
 	}
 	
 	private void addToReplayManager() {
-		replayManager.addAction(clone());
+		if (replayManager.isActiveRecording())
+			replayManager.addAction(clone());
 	}
+		
 	private void loadFile() {
-		FileChooser fileChooser = new FileChooser();
-		HashMap<String, ArrayList<String>> extensions = commandManager.getExtentionsList();
-		ArrayList<String> combinedExt = new ArrayList<String>();
-		for (String i: extensions.keySet()) {
-			combinedExt.addAll(extensions.get(i));
-			fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(i+" documents", extensions.get(i)));
-		}
-		
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All supported documents", combinedExt);
-		fileChooser.getExtensionFilters().add(extFilter);
-		fileChooser.setSelectedExtensionFilter(extFilter);
-		fileChooser.setTitle("Choose File to Load");
-		file = fileChooser.showOpenDialog(mainStage);
-		
-		if (file != null) {
-			String text = commandManager.openDocument(file, encryption);
-			textArea.setText(text);
-		}
+		file = FileHandler.showLoadFileChooser(commandManager.getExtentionsList(), mainStage);		
+		replayAction();
 	}
 }

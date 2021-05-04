@@ -1,22 +1,23 @@
 package documentWriter;
 
+import java.io.File;
 
 public class DocumentWriterFactory 
 {
 
-	public DocumentWriter createWriter(String filename, String filetype, String encryption)
+	public DocumentWriter createWriter(File file, String filetype, String encryption)
 	{
 		DocumentWriter reader = null;
 		switch (filetype){
 		case "word":
-			reader = new WordWriter(filename);
+			reader = new WordWriter(file);
 			break;
 		case "excel":
-			reader = new ExcelWriter(filename);
+			reader = new ExcelWriter(file);
 			break;
 		}
 		
-		switch (filetype){
+		switch (encryption){
 		case "atbash":
 			reader = new WriterAtBashDecorator(reader);
 			break;

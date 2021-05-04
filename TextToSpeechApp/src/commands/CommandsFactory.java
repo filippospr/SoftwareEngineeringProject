@@ -27,7 +27,17 @@ public class CommandsFactory{
 	 			((OpenDocument)result).setEncryption("rot13");
     			return result;
 		  	case "save":
-		    	return new SaveDocument();
+		  		result = new SaveDocument(stage, manager);
+		  		((SaveDocument)result).setEncryption("");
+		    	return result;
+		  	case "saveAtBash":
+		  		result = new SaveDocument(stage, manager);
+		    	((SaveDocument)result).setEncryption("atbash");
+		    	return result;
+		  	case "saveRot13":
+		  		result = new SaveDocument(stage, manager);
+		    	((SaveDocument)result).setEncryption("rot13");
+		    	return result;
 		    case "speech":
 		    	return new DocumentToSpeech(stage, manager);
 		    default:

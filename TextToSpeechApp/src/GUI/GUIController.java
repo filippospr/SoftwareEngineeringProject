@@ -1,7 +1,6 @@
 package gui;
-import java.io.IOException;
 
-import com.sun.javafx.collections.ObservableListWrapper;
+import java.io.IOException;
 
 import commands.Action;
 import commands.CommandManager;
@@ -9,9 +8,6 @@ import commands.CommandsFactory;
 import commands.ReplayManager;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -22,8 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GUIController extends Application{
@@ -33,6 +31,7 @@ public class GUIController extends Application{
 	private CommandsFactory commandsFactory = new CommandsFactory(commandManager, mainStage);
 	@FXML private MenuItem openFile;
 	@FXML private TextArea textArea;
+	@FXML private MenuItem recordingButton;
 	
 	public void start(Stage stage) throws IOException
     {
@@ -49,8 +48,9 @@ public class GUIController extends Application{
         // Set the Scene to the Stage
         stage.setScene(mainScene);
         
+        stage.getIcons().add(new Image("gui_files/images/icon.png"));
         // Set the Title to the Stage
-        stage.setTitle("A simple FXML Example");
+        stage.setTitle("Text2Speech App");
         
         // Display the Stage
         stage.show();
@@ -61,7 +61,7 @@ public class GUIController extends Application{
 		Platform.exit();
 	}
 	
-	public void openDocument(ActionEvent e)
+	public void openDocument()
 	{
 		open("open");
 	}
@@ -76,6 +76,21 @@ public class GUIController extends Application{
 		open("openRot13");
 	}
 	
+	public void saveDocument()
+	{
+		save("save");
+	}
+
+	public void saveAtBashDocument()
+	{
+		save("saveAtBash");
+	}
+	
+	public void saveRot13Document()
+	{
+		save("saveRot13");
+	}
+	
 	public void transformText() {
 		Action op = commandsFactory.createCommand("speech");
 		op.setReplayManager(replayManager);
@@ -83,24 +98,38 @@ public class GUIController extends Application{
 		op.handle();
 	}
 	
+	public void toggleRecordingStatus() {
+		if(replayManager.isActiveRecording()){
+			recordingButton.setText("Start Recording");
+			replayManager.endRecording();
+		} else {
+			recordingButton.setText("End Recording");
+			replayManager.startRecording();
+		}		
+	}
+	
 	public void replay()
 	{
 		Stage selectionMenu = new Stage();
-		selectionMenu.setTitle("Transform only selected text?");
 		//stop resize,and stay on top of parent
 		selectionMenu.setResizable(false);
 		selectionMenu.initOwner(mainStage);
+		selectionMenu.initModality(Modality.APPLICATION_MODAL);
+		selectionMenu.setTitle("Choose transformation to replay");
+		
 		VBox container = new VBox();
 		container.setAlignment(Pos.TOP_CENTER);
 		container.setSpacing(10);
 		
+		
+		//create replay list and add it to window
 		ListView<Action> listView = new ListView<Action>();
 		listView.getItems().addAll(replayManager.getCommands());
-		listView.setFixedCellSize(40);//"-fx-font: 100pt \"Arial\";"
-		listView.setStyle("-fx-font-size: 1.5em ;");
+		listView.setFixedCellSize(40);
+		listView.setStyle("-fx-font-size: 1.5em ;");		
 		container.getChildren().add(listView);
 		
-		
+		//create and add buttons to scene
 		HBox buttonContainer = new HBox();
 		buttonContainer.setSpacing(10);
 		buttonContainer.setAlignment(Pos.TOP_CENTER);
@@ -113,6 +142,8 @@ public class GUIController extends Application{
 		buttonContainer.getChildren().addAll(selectButton, cancelButton);
 		container.getChildren().add(buttonContainer);
 		VBox.setMargin(buttonContainer, new Insets(0,0,10,0));
+		
+		//set actions for buttons
 		selectButton.setOnAction((event) -> {
 			int index = listView.getSelectionModel().getSelectedIndex();
 			if (index >= 0)
@@ -126,8 +157,13 @@ public class GUIController extends Application{
 		Scene selectionMenuScene = new Scene(container, 450, 350);
 		selectionMenu.setScene(selectionMenuScene);
 		selectionMenu.showAndWait();
-		
-		//replayManager.replay();
+	}
+	
+	public void save(String encryption) {
+        Action op = commandsFactory.createCommand(encryption);
+		op.setReplayManager(replayManager);
+		op.setTextArea(textArea);
+		op.handle();
 	}
 	
 	private void open(String encryption) {
@@ -137,11 +173,12 @@ public class GUIController extends Application{
 		op.handle();
 	}
 	
+	
+	
+	//is called when the window is closed
 	@Override
 	public void stop(){
 		commandManager.stop(); 
-	    //System.out.println("Stage is closing");
-	    // Save file
 	}
 	
 	public static void main(String[] args) {
