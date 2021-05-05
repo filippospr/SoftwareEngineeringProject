@@ -6,14 +6,21 @@ public class ReaderAtBashDecorator extends ReaderDecorator {
         super(reader);
     }
 
+    @Override
     public String decrypt(String word){
         String result="";
         for(char c:word.toCharArray()){
-            if(Character.isLowerCase(c)){
+            if(c >= 'a' && c <= 'z'){
                 result+= (char) ('a' + ('z' - c));
             }
-            else if(Character.isUpperCase(c)){
+            else if(c >= 'A' && c <= 'Z'){
                 result+= (char) ('A' + ('Z' - c));
+            }
+            else if(c >= 'á' && c <= 'ù'){
+            	result+= (char) ('á' + ('ù' - c));
+            }
+            else if(c >= 'Á' && c <= 'Ù'){
+            	result+= (char) ('Á' + ('Ù' - c));
             }
             else{
                 result+=c;

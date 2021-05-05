@@ -21,13 +21,13 @@ public class WordReader implements DocumentReader {
 	@Override
 	public ArrayList<String> read(){
 		ArrayList<String> result = new ArrayList<String>();
-        try (XWPFDocument doc = new XWPFDocument(
-               new FileInputStream(file))) {
+        try (XWPFDocument doc = new XWPFDocument(new FileInputStream(file))) {
+        	
             XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
             String docText = xwpfWordExtractor.getText();
+            
             result.addAll(Arrays.asList(docText.split("\n")));
             xwpfWordExtractor.close();
-            //System.out.println(docText);
 
             // find number of words in the document
             long count = Arrays.stream(docText.split("\\s+")).count();

@@ -1,13 +1,12 @@
 package documentReader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -17,17 +16,19 @@ public class ExcelReader implements DocumentReader {
 	public ExcelReader(File file) {
 		this.file = file;
 	}
+	
 	@Override
 	public ArrayList<String> read() {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
-			FileInputStream excelFile = new FileInputStream(file);
-            Workbook workbook = new XSSFWorkbook(excelFile);
-            excelFile.close();
+            Workbook workbook = new XSSFWorkbook(file);//create new workbook from the file
+            
+            //right now we only get the first sheet of the Excel file
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
+            //get all cells of sheet
             while (iterator.hasNext()) {
-
+            	
                 Row currentRow = iterator.next();
                 Iterator<Cell> cellIterator = currentRow.iterator();
 
@@ -36,27 +37,20 @@ public class ExcelReader implements DocumentReader {
                     Cell currentCell = cellIterator.next();
                     if (currentCell.getCellType() == CellType.STRING) {
                     	result.add(currentCell.getStringCellValue());
-                        //System.out.print(currentCell.getStringCellValue() + "--");
                     } else if (currentCell.getCellType() == CellType.NUMERIC) {
-                    	System.out.println("makaronia me tyri");
                     	result.add(currentCell.getNumericCellValue()+"");
-                       // System.out.print(currentCell.getNumericCellValue() + "--");
                     }
-
                 }
-                result.add("\n");
-                //System.out.println();
-               
+                result.add("\n");               
             }
-            
-            
             workbook.close();
 		} catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-		System.out.println(result);
+        } catch (InvalidFormatException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }

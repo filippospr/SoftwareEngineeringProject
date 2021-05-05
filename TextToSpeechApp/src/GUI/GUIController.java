@@ -8,6 +8,8 @@ import commands.CommandsFactory;
 import commands.ReplayManager;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -15,8 +17,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -29,9 +33,18 @@ public class GUIController extends Application{
 	private CommandManager commandManager = new CommandManager();
 	private ReplayManager replayManager = new ReplayManager();
 	private CommandsFactory commandsFactory = new CommandsFactory(commandManager, mainStage);
-	@FXML private MenuItem openFile;
+	private AudioPlayerController audioBarController;
 	@FXML private TextArea textArea;
 	@FXML private MenuItem recordingButton;
+	@FXML private VBox audioControlBar;
+	@FXML private Button playButton;
+	@FXML private Button rewindButton;
+	@FXML private Button ffButton;
+	@FXML private Slider pitchSelector;
+	@FXML private Slider volumeSlider;
+	@FXML private Label speedLabel;
+	
+	
 	
 	public void start(Stage stage) throws IOException
     {
@@ -51,7 +64,6 @@ public class GUIController extends Application{
         stage.getIcons().add(new Image("gui_files/images/icon.png"));
         // Set the Title to the Stage
         stage.setTitle("Text2Speech App");
-        
         // Display the Stage
         stage.show();
     }
@@ -91,11 +103,37 @@ public class GUIController extends Application{
 		save("saveRot13");
 	}
 	
+	public void pauseAudio(){
+		audioBarController.pauseAudio();
+	}
+
 	public void transformText() {
 		Action op = commandsFactory.createCommand("speech");
 		op.setReplayManager(replayManager);
 		op.setTextArea(textArea);
 		op.handle();
+		audioBarController = new AudioPlayerController(playButton, rewindButton, ffButton);
+		audioBarController.setAudioManager(commandManager.getAudioManager());
+		audioBarController.setAudioControlBar(audioControlBar);
+		audioBarController.setCommandManager(commandManager);
+		audioBarController.toggleEnableAudioBar();
+		audioBarController.pauseAudio();
+		pitchSelector.setValue(audioBarController.getPitch());
+		pitchSelector.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+            			audioBarController.setPitch(new_val.intValue());
+                }
+            });
+		volumeSlider.setValue(audioBarController.getVolume());
+		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+            			audioBarController.setVolume(new_val.floatValue());
+                }
+            });
+		//speedLabel.setText("x"+audioBarController.getSpeed());
+		//audioBarController.pauseAudio();
 	}
 	
 	public void toggleRecordingStatus() {
@@ -105,6 +143,31 @@ public class GUIController extends Application{
 		} else {
 			recordingButton.setText("End Recording");
 			replayManager.startRecording();
+		}
+	}
+	
+	public void mute() {
+		audioBarController.setVolume(0);
+		volumeSlider.setValue(0);
+	}
+	
+	public void speedUp() {
+		float speed = Float.parseFloat(speedLabel.getText().substring(1));
+		
+		if (speed < 3) {
+			speed = Math.min(speed+0.25f,3);
+			speedLabel.setText("x"+speed);
+			audioBarController.SpeedUp();
+		}		
+	}
+	
+	public void speedDown() {
+		float speed = Float.parseFloat(speedLabel.getText().substring(1));
+		
+		if (speed > 0.25) {
+			speed = Math.max(speed-0.25f,0.25f);
+			speedLabel.setText("x"+speed);
+			audioBarController.SpeedDown();
 		}		
 	}
 	
@@ -126,7 +189,7 @@ public class GUIController extends Application{
 		ListView<Action> listView = new ListView<Action>();
 		listView.getItems().addAll(replayManager.getCommands());
 		listView.setFixedCellSize(40);
-		listView.setStyle("-fx-font-size: 1.5em ;");		
+		listView.setStyle("-fx-font-size: 1.5em;");		
 		container.getChildren().add(listView);
 		
 		//create and add buttons to scene
@@ -139,6 +202,7 @@ public class GUIController extends Application{
 		selectButton.setMinHeight(40);
 		cancelButton.setMinWidth(100);
 		cancelButton.setMinHeight(40);
+		
 		buttonContainer.getChildren().addAll(selectButton, cancelButton);
 		container.getChildren().add(buttonContainer);
 		VBox.setMargin(buttonContainer, new Insets(0,0,10,0));
@@ -166,6 +230,12 @@ public class GUIController extends Application{
 		op.handle();
 	}
 	
+	//is called when the window is closed
+	@Override
+	public void stop(){
+		commandManager.stop(); 
+	}
+	
 	private void open(String encryption) {
 		Action op = commandsFactory.createCommand(encryption);
 		op.setReplayManager(replayManager);
@@ -174,12 +244,6 @@ public class GUIController extends Application{
 	}
 	
 	
-	
-	//is called when the window is closed
-	@Override
-	public void stop(){
-		commandManager.stop(); 
-	}
 	
 	public static void main(String[] args) {
 		

@@ -49,9 +49,6 @@ public class CommandManager {
 		if (ext == null) {
 			return;
 		}
-		System.out.println(file);
-		System.out.println(ext);
-		System.out.println(encryption);
 		document.save(file, ext, encryption);
 	}
 	
@@ -60,7 +57,7 @@ public class CommandManager {
 		this.audioManager = audioManager;
 	}
 	
-	public void play(String text) {	
+	public void play(String text) {
 		audioManager.play(text);
 	}
 	
@@ -111,6 +108,10 @@ public class CommandManager {
 
 	public void setContents(String[] text) {
 		document.setContents(text);
+	}
+
+	public TTSFacade getAudioManager() {
+		return audioManager;
 	}
 	
 }

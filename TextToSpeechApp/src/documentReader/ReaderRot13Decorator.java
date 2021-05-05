@@ -4,7 +4,7 @@ public class ReaderRot13Decorator extends ReaderDecorator {
 
 	 public ReaderRot13Decorator(DocumentReader reader)    {
 	        super(reader);
-	    }
+	 }
 	@Override
 	public String decrypt(String word){
         String result="";

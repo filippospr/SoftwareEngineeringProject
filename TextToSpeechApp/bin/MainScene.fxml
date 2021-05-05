@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -105,13 +106,8 @@
             <Font size="18.0" />
          </font>
       </TextArea>
-      <VBox id="AudiocontrolsContainer" alignment="CENTER" disable="true" VBox.vgrow="NEVER">
+      <VBox id="AudiocontrolsContainer" fx:id="audioControlBar" alignment="CENTER" disable="true" VBox.vgrow="NEVER">
          <children>
-            <Slider stylesheets="@gui_files/css/slider.css">
-               <cursor>
-                  <Cursor fx:constant="E_RESIZE" />
-               </cursor>
-            </Slider>
             <GridPane alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" VBox.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="509.0" minWidth="0.0" percentWidth="15.0" prefWidth="143.0" />
@@ -124,23 +120,17 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1020.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
                      <children>
-                      <Button id="rewindbutton" mnemonicParsing="false" styleClass="rewind" stylesheets="@gui_files/css/rewind.css">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </Button>
-                        <Button id="playbutton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton" stylesheets="@gui_files/css/playbutton.css">
+                        <Button fx:id="playButton" alignment="CENTER" maxWidth="77.0" minWidth="34.0" mnemonicParsing="false" onAction="#pauseAudio" prefHeight="55.0" prefWidth="77.0" style="-fx-alignment: center; -fx-min-width: 55; -fx-min-height: 55; -fx-max-width: 55; -fx-max-height: 55; -fx-background-radius: 10em;" styleClass="playbutton">
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                            <effect>
                               <DropShadow />
                            </effect>
-                        </Button>
-                        <Button id="ffbutton" mnemonicParsing="false" styleClass="fastforward" stylesheets="@gui_files/css/fastforward.css">
-                           <effect>
-                              <DropShadow />
-                           </effect>
+                           <stylesheets>
+                              <URL value="@gui_files/css/playbutton.css" />
+                              <URL value="@gui_files/css/pausebutton.css" />
+                           </stylesheets>
                         </Button>
                      </children>
                      <GridPane.margin>
@@ -149,12 +139,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@gui_files/css/soundbutton.css" HBox.hgrow="NEVER">
+                        <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#mute" prefHeight="25.0" prefWidth="25.0" styleClass="soundbutton" stylesheets="@gui_files/css/soundbutton.css" HBox.hgrow="NEVER">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Slider prefHeight="62.0" prefWidth="140.0">
+                        <Slider fx:id="volumeSlider" max="1.0" prefHeight="62.0" prefWidth="140.0">
                            <effect>
                               <DropShadow height="3.0" radius="2.25" width="8.0" />
                            </effect>
@@ -164,7 +154,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </HBox>
-                  <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -173,19 +163,19 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Slider />
+                              <Slider fx:id="pitchSelector" max="600.0" minorTickCount="5" snapToTicks="true" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" VBox.vgrow="NEVER">
                            <children>
-                              <Label layoutX="60.0" layoutY="17.0" text="Audio Speed">
+                              <Label layoutX="60.0" layoutY="17.0" text="Speed">
                                  <padding>
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Button minWidth="25.0" mnemonicParsing="false" text="-" />
-                              <Button mnemonicParsing="false" text="+" />
-                              <Label styleClass="speedlabel" stylesheets="@gui_files/css/speedlabel.css" text="x1">
+                              <Button minWidth="25.0" mnemonicParsing="false" onAction="#speedDown" text="-" />
+                              <Button fx:id="speedUpButton" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#speedUp" prefHeight="25.0" prefWidth="25.0" text="+" />
+                              <Label fx:id="speedLabel" alignment="CENTER" prefHeight="30.0" prefWidth="60.0" styleClass="speedlabel" stylesheets="@gui_files/css/speedlabel.css" text="x1" HBox.hgrow="ALWAYS">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -198,7 +188,7 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets right="20.0" />
+                              <Insets />
                            </VBox.margin>
                         </HBox>
                      </children>

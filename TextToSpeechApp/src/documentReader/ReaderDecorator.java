@@ -11,19 +11,14 @@ public abstract class ReaderDecorator implements DocumentReader {
 	}
 	@Override
 	public ArrayList<String> read(){
-		 DocumentReader reader = getDocumentReader();
-	        ArrayList<String> content=reader.read();
-	        ArrayList<String> decryptContent=new ArrayList<String>();
-
-	        for(String word:content){
-	            decryptContent.add(decrypt(word));
-	        }
-	        return decryptContent;
+		ArrayList<String> content=reader.read();
+		ArrayList<String> decryptContent=new ArrayList<String>();
+		
+		for(String word:content){
+		    decryptContent.add(decrypt(word));
+		}
+		return decryptContent;
 	}
 	
 	public abstract String decrypt(String word);
-	public DocumentReader getDocumentReader()
-	{
-		return reader;
-	}
 }

@@ -1,18 +1,17 @@
-.pausebutton {
+Button.pausebutton {
 	-fx-background-image: url("../images/pausebutton.png");
-	-fx-background-position: relative;
+	-fx-background-position: center;
 	-fx-background-size: 100%;
 	-fx-background-repeat: stretch;
 	-fx-background-color:transparent;
 	-fx-opacity: 1.0;
+	-fx-view-order: -1;
 }
 
-.pausebutton:hover {
-	-fx-opacity: 0.8;
+Button.pausebutton:hover {
+	-fx-background-image: url("../images/pausebuttonhover.png");
 }
 
-.pausebutton:pressed {
+Button.pausebutton:pressed {
 	-fx-background-image: url("../images/pausebuttonpressed.png");
 }
-
-/*2d819d*/
