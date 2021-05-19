@@ -4,21 +4,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import audioPlayer.AudioPlayerController;
 import documentReader.DocumentReaderFactory;
 import documentWriter.DocumentWriterFactory;
 import model.Document;
-import model.TTSFacade;
 
 public class CommandManager {
 	private Document document;
-	private TTSFacade audioManager;
+	private AudioPlayerController audioController;
 	private int transformStatus = -1;
 	private HashMap<String,ArrayList<String>> extensionsList;
 	
-	public CommandManager()
+	public CommandManager(AudioPlayerController controller)
 	{
 		document = new Document();
-		audioManager = new TTSFacade();
+		audioController = controller;
 		document.setDocReaderFactory(new DocumentReaderFactory());
 		document.setDocWriterFactory(new DocumentWriterFactory());
 		initExtentionsList();
@@ -52,17 +52,8 @@ public class CommandManager {
 		document.save(file, ext, encryption);
 	}
 	
-	public void setAudioManager(TTSFacade audioManager)
-	{
-		this.audioManager = audioManager;
-	}
-	
 	public void play(String text) {
-		audioManager.play(text);
-	}
-	
-	public void stop() {
-		audioManager.stop();
+		audioController.play(text);
 	}
 	
 	public void setTransformStatus(int status)
@@ -109,9 +100,4 @@ public class CommandManager {
 	public void setContents(String[] text) {
 		document.setContents(text);
 	}
-
-	public TTSFacade getAudioManager() {
-		return audioManager;
-	}
-	
 }

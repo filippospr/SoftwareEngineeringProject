@@ -24,7 +24,6 @@ public class DocumentToSpeech implements Action  {
 		commandManager = manager;
 	}
 	
-
 	@Override
 	public void setReplayManager(ReplayManager replayManager) {
 		this.replayManager = replayManager;

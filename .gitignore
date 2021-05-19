@@ -1,3 +1,4 @@
 .metadata/
-./**/*.class
-D:\Code\Github\SoftwareEngineeringProject\TextToSpeechApp\bin\**\*.class
+*.class
+**/*.class
+TextToSpeechApp/bin/**/*.class

@@ -1,6 +1,6 @@
 package documentWriter;
 
-public class WriterRot13Decorator extends WriterDecorator implements DocumentWriter {
+public class WriterRot13Decorator extends WriterDecorator {
 	
 	public WriterRot13Decorator(DocumentWriter writer) {
 		super(writer);

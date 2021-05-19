@@ -21,5 +21,14 @@
 	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-ooxml-full-5.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-ooxml-lite-5.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/Code/Java external Libs/POI APACHE/poi-scratchpad-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/cmudict04.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/freetts.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="D:/Code/Java external Libs/FREETTS/lib/mbrola.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

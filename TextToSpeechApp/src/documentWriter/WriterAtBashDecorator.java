@@ -1,6 +1,6 @@
 package documentWriter;
 
-public class WriterAtBashDecorator extends WriterDecorator implements DocumentWriter {
+public class WriterAtBashDecorator extends WriterDecorator {
 	
 	public WriterAtBashDecorator(DocumentWriter writer) {
 		super(writer);
