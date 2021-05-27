@@ -73,8 +73,8 @@ public class DocumentToSpeech implements Action  {
 	}
 	
 	public String toString() {
-		String[] tList = text.split(" ");
-		return String.format("Transform: %s... (%d words)", tList[0], tList.length);
+		String[] tList = text.split("\\s+",5);
+		return String.format("Transform: %s... (%d words)", String.join(" ", tList), tList.length);
 	}
 	
 	private void addToReplayManager() {

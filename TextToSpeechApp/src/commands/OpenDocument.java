@@ -15,9 +15,17 @@ public class OpenDocument implements Action {
 	private TextArea textArea;
 	private File file = null;
 	
+	public OpenDocument(CommandManager manager) {
+		commandManager = manager;
+	}
+	
 	public OpenDocument(Stage stage, CommandManager manager) {
 		mainStage = stage;
 		commandManager = manager;
+	}
+	
+	public void setStage(Stage stage) {
+		mainStage = stage;
 	}
 	
 	public void setCommandManager(CommandManager manager) {
@@ -36,9 +44,15 @@ public class OpenDocument implements Action {
 	}
 	@Override
 	public void handle() {
-		loadFile();
+		file = FileHandler.showLoadFileChooser(commandManager.getExtentionsList(), mainStage);
+		action();
+	}
+	
+	public  void action() {
+		replayAction();
 		addToReplayManager();
 	}
+	
 	public void setFile(File f) {
 		file = f;
 	}
@@ -57,7 +71,9 @@ public class OpenDocument implements Action {
 	{
 		if (file != null) {
 			String text = commandManager.openDocument(file, encryption);
-			textArea.setText(text);
+			if (textArea != null) {
+				textArea.setText(text);
+			}
 		}
 	}
 	
@@ -70,8 +86,5 @@ public class OpenDocument implements Action {
 			replayManager.addAction(clone());
 	}
 		
-	private void loadFile() {
-		file = FileHandler.showLoadFileChooser(commandManager.getExtentionsList(), mainStage);		
-		replayAction();
-	}
+	
 }

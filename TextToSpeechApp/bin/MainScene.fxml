@@ -89,12 +89,12 @@
                      </accelerator>
                   </MenuItem>
                   <MenuItem fx:id="recordingButton" mnemonicParsing="false" onAction="#toggleRecordingStatus" text="Start Recording" />
-                  <MenuItem fx:id="replayButton" mnemonicParsing="false" onAction="#replay" text="Replay Transformation" />
+                  <MenuItem fx:id="replayButton" mnemonicParsing="false" onAction="#replay" text="Replay Action" />
             <SeparatorMenuItem mnemonicParsing="false" text="Encrypted Save" />
             <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" text="Help" visible="false">
           <items>
             <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
           </items>

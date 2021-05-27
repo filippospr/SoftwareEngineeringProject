@@ -36,9 +36,9 @@ public class ExcelReader implements DocumentReader {
 
                     Cell currentCell = cellIterator.next();
                     if (currentCell.getCellType() == CellType.STRING) {
-                    	result.add(currentCell.getStringCellValue());
+                    	result.add(currentCell.getStringCellValue()+" ");
                     } else if (currentCell.getCellType() == CellType.NUMERIC) {
-                    	result.add(currentCell.getNumericCellValue()+"");
+                    	result.add(currentCell.getNumericCellValue()+" ");
                     }
                 }
                 result.add("\n");               

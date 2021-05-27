@@ -21,9 +21,9 @@ public class ReplayManager {
 		commandList = new ArrayList<Action>();
 	}
 	
-	/*public void replay(int i) {
+	public void replay(int i) {
 			commandList.get(i).replayAction();
-	}*/
+	}
 	
 	public void replay(Stage mainStage)
 	{
@@ -65,7 +65,7 @@ public class ReplayManager {
 		selectButton.setOnAction((event) -> {
 			int index = listView.getSelectionModel().getSelectedIndex();
 			if (index >= 0)
-				commandList.get(index).replayAction();
+				replay(index);
 			selectionMenu.close();
 		});
 		cancelButton.setOnAction((event) -> {
@@ -76,10 +76,6 @@ public class ReplayManager {
 		selectionMenu.setScene(selectionMenuScene);
 		selectionMenu.showAndWait();
 	}
-	
-	/*public ArrayList<Action> getCommands(){
-		return commandList;
-	}*/
 	
 	public void startRecording()
 	{
@@ -97,5 +93,9 @@ public class ReplayManager {
 	
 	public void addAction(Action e) {
 		commandList.add(e);
+	}
+	
+	public int getCommandListSize() {
+		return commandList.size();
 	}
 }

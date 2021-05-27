@@ -15,13 +15,23 @@ public class CommandManager {
 	private int transformStatus = -1;
 	private HashMap<String,ArrayList<String>> extensionsList;
 	
-	public CommandManager(AudioPlayerController controller)
+	public CommandManager()
 	{
 		document = new Document();
-		audioController = controller;
 		document.setDocReaderFactory(new DocumentReaderFactory());
 		document.setDocWriterFactory(new DocumentWriterFactory());
 		initExtentionsList();
+	}
+	
+	public CommandManager(AudioPlayerController controller)
+	{
+		this();
+		setAudioController(controller);
+	}
+	
+	public void setAudioController(AudioPlayerController controller)
+	{
+		audioController = controller;
 	}
 	
 	public String openDocument(File file, String encryption)
@@ -39,7 +49,10 @@ public class CommandManager {
 		for (String s : contents)
 		{
 		    res.append(s);
-		    res.append("\n");
+		    if (ext.equals("word"))
+		    {
+		    	res.append("\n");
+		    }
 		}		
 		return res.toString();
 	}

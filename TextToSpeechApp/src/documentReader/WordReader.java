@@ -30,8 +30,8 @@ public class WordReader implements DocumentReader {
             xwpfWordExtractor.close();
 
             // find number of words in the document
-            long count = Arrays.stream(docText.split("\\s+")).count();
-            System.out.println("Total words: " + count);
+            //long count = Arrays.stream(docText.split("\\s+")).count();
+            //System.out.println("Total words: " + count);
 
         }catch (FileNotFoundException e) {
             e.printStackTrace();

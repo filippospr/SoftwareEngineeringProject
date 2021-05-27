@@ -28,7 +28,6 @@ public class GUIController extends Application{
 	private Stage mainStage;
 	private AudioPlayerController audioBarController = new AudioPlayerController();
 	private ReplayManager replayManager = new ReplayManager();
-	//private CommandManager commandManager = new CommandManager(audioBarController);
 	private CommandsFactory commandsFactory = new CommandsFactory(new CommandManager(audioBarController), mainStage);
 	
 	private boolean firstTransform = true;
@@ -40,8 +39,6 @@ public class GUIController extends Application{
 	@FXML private Slider pitchSelector;
 	@FXML private Slider volumeSlider;
 	@FXML private Label speedLabel;
-	
-	
 	
 	public void start(Stage stage) throws IOException
     {
