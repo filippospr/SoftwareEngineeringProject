@@ -42,7 +42,7 @@ public class TTSFacade{
 		    	}
 		    	controller.disableAudioBar();
 		    	controller.toggleAudioPlayback();
-		    	resetVoice();
+		    	//resetVoice();
 		    	status="stop";
 		    }
 		});
@@ -90,6 +90,7 @@ public class TTSFacade{
 	}
 
 	public float getRate() {
+		System.out.println();
 		return voice.getRate();
 	}
 

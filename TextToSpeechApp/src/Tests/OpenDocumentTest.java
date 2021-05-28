@@ -6,21 +6,10 @@ import java.io.File;
 
 import commands.CommandManager;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OpenDocumentTest {
 
-	@BeforeEach
-	void setUp() throws Exception {
-		
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-	
 	@Test
 	void openWordDocumentNoEnryption() {
 		File wordFile= new File(ClassLoader.getSystemResource("./test_files/testword1.docx").getFile());
@@ -75,7 +64,4 @@ class OpenDocumentTest {
 		assertEquals("This is a test \n", contents);		
 		
 	}
-	
-	
-
 }

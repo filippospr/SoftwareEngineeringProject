@@ -11,9 +11,10 @@ import commands.CommandManager;
 import commands.OpenDocument;
 import commands.ReplayManager;
 
-class EndRecordingTest {
+class RecordingTest {
 	ReplayManager replayManager;
 	CommandManager commandManager;
+	
 	@BeforeEach
 	void setUp() {
 		replayManager = new ReplayManager();
@@ -22,7 +23,7 @@ class EndRecordingTest {
 	}
 	
 	@Test
-	void testReplayAction() {
+	void testStartRecording() {
 		OpenDocument testAction = new OpenDocument(commandManager);
 		testAction.setFile(new File(ClassLoader.getSystemResource("./test_files/testword1.docx").getFile()));
 		testAction.setReplayManager(replayManager);
@@ -32,7 +33,7 @@ class EndRecordingTest {
 	}
 	
 	@Test
-	void testEndrecording() {
+	void testEndRecording() {
 		OpenDocument testAction = new OpenDocument(commandManager);
 		testAction.setFile(new File(ClassLoader.getSystemResource("./test_files/testword1.docx").getFile()));
 		testAction.setReplayManager(replayManager);

@@ -10,9 +10,13 @@ public class AudioPlayerController {
 	private Button playButton;
 	
 	public AudioPlayerController() {
-		audioManager = new TTSFacade();
-		defaultSpeed = audioManager.getRate();
+		setTTSFacade(new TTSFacade());
+	}
+	
+	public void setTTSFacade(TTSFacade facade) {
+		audioManager = facade;
 		audioManager.setController(this);
+		defaultSpeed = audioManager.getRate();
 	}
 	
 	public void setAudioControlBar(VBox audioBar) {
@@ -29,8 +33,10 @@ public class AudioPlayerController {
 	
 	public void play(String text) {
 		audioManager.play(text);
-		audioControlBar.setDisable(false);
-		playAudio();
+		if (audioControlBar != null) {
+			audioControlBar.setDisable(false);
+			playAudio();
+		}
 	}
 	
 	public void stop() {
@@ -38,11 +44,11 @@ public class AudioPlayerController {
 	}
 	
 	public void SpeedUp() {
-		audioManager.setRate(defaultSpeed+defaultSpeed*0.25f);
+		setSpeed(defaultSpeed-defaultSpeed*0.25f);
 	}
 
 	public void SpeedDown() {
-		audioManager.setRate(defaultSpeed-defaultSpeed*0.25f);
+		setSpeed(defaultSpeed+defaultSpeed*0.25f);
 	}
 
 	public void setPitch(int pitch) {

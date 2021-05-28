@@ -7,21 +7,10 @@ import java.io.IOException;
 
 import commands.CommandManager;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SaveDocumentTest {
 
-	@BeforeEach
-	void setUp() throws Exception {
-		
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-	
 	@Test
 	void saveWordDocumentNoEnryption() {
 		

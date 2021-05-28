@@ -38,6 +38,10 @@ public class DocumentToSpeech implements Action  {
 	public void replayAction() {
 		commandManager.play(text);
 	}
+	
+	public void setText(String text) {
+		this.text= text; 
+	}
 
 	@Override
 	public void handle() {
@@ -54,14 +58,18 @@ public class DocumentToSpeech implements Action  {
 			System.out.println("Canceled");
 			return;
 		}
-		text =  textArea.getText();
+		setText(textArea.getText());
 		if (transformStatus == 1) {
-			text = textArea.getSelectedText();
+			setText(textArea.getSelectedText());
 		}
-		replayAction();
-		commandManager.setTransformStatus(-1);
-		addToReplayManager();
 		
+		action();
+	}
+	
+	public void action() {
+		replayAction();
+		addToReplayManager();
+		commandManager.setTransformStatus(-1);
 	}
 	@Override
 	public Action clone() {
