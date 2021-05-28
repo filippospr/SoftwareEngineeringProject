@@ -16,7 +16,6 @@ class OpenDocumentTest {
 		CommandManager manager= new CommandManager();
 		String contents=manager.openDocument(wordFile,"");
 		assertEquals("Makaronia 62… I  ate some anchovy today.\n", contents);		
-		
 	}
 	
 	@Test
@@ -24,8 +23,7 @@ class OpenDocumentTest {
 		File excelFile= new File(ClassLoader.getSystemResource("test_files/testexcel.xlsx").getFile());
 		CommandManager manager= new CommandManager();
 		String contents=manager.openDocument(excelFile,"");
-		assertEquals("This is  a  test \n", contents);		
-		
+		assertEquals("This is  a  test \n", contents);
 	}
 	
 	@Test
@@ -34,7 +32,6 @@ class OpenDocumentTest {
 		CommandManager manager= new CommandManager();
 		String contents=manager.openDocument(wordFile,"atbash");
 		assertEquals("Makaronia 62… I  ate some anchovy today.\n", contents);		
-		
 	}
 	
 	@Test
